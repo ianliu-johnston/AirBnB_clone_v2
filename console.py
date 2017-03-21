@@ -1,10 +1,16 @@
 #!/usr/bin/python3
 import cmd
-from models import *
-
+from models.base_model import BaseModel
+from models.place import Place
+from models.state import State
+from models.amenity import Amenity
+from models.city import City
+from models.user import User
+from models.review import Review
+from models.__init__ import storage
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
     storage.reload()
 
     valid_classes = ["BaseModel", "User", "State",
@@ -25,15 +31,33 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Create a new Basemodel"""
         args = args.split()
-        if len(args) != 1:
-            print("** clas name missing **")
+        if len(args) < 1:
+            print("** class name missing **")
         else:
-            if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
-                new_obj = eval(args[0])()
+            if not args[0] in HBNBCommand.valid_classes:
+                print("** class name does not exist **")
+            if len(args) > 1 and args[0]:
+                usr_input = self.__check_input(args[1:])
+                new_obj = eval(args[0])(**usr_input)
                 print(new_obj.id)
                 new_obj.save()
             else:
-                return
+                new_obj = eval(args[0])()
+
+    def __check_input(self, arguments):
+        """Checking all the user inputs"""
+        for items in arguments:
+            if "=" not in items:
+                continue
+            items = items[1].split("=")
+            if items[1].startswith['"'] and items[1].endswith['"']:
+                items[1] = items[1][1:-1]
+                items[1] = items[1].replace("_", " ")
+            elif "." in items[1]:
+                items[1] = float(items[1])
+            else:
+                items[1] = int(items[1])
+        return (arguments)
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""

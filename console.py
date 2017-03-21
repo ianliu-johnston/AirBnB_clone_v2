@@ -46,18 +46,20 @@ class HBNBCommand(cmd.Cmd):
 
     def __check_input(self, arguments):
         """Checking all the user inputs"""
+        new_dict = {}
         for items in arguments:
             if "=" not in items:
                 continue
-            items = items[1].split("=")
-            if items[1].startswith['"'] and items[1].endswith['"']:
+            items = items.split("=")
+            if items[1].startswith('"') and items[1].endswith('"'):
                 items[1] = items[1][1:-1]
                 items[1] = items[1].replace("_", " ")
             elif "." in items[1]:
                 items[1] = float(items[1])
             else:
                 items[1] = int(items[1])
-        return (arguments)
+            new_dict.update({items[0]: items[1]})
+        return (new_dict)
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""

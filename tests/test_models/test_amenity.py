@@ -21,7 +21,7 @@ class Test_AmenityModel(unittest.TestCase):
         self.model.save()
 
     def tearDown(self):
-        self.cli.do_destroy("Amenity " + self.model.amenity)
+        self.cli.do_destroy("Amenity " + self.model.id)
 
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))

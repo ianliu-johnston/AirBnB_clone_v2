@@ -2,7 +2,14 @@ import unittest
 import sys
 import io
 from contextlib import contextmanager
-from models import *
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.__init__ import storage
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 from datetime import datetime
 from console import HBNBCommand
 
@@ -69,13 +76,13 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_show("d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
-        self.assertEqual(output, "** no instance found **")
+        self.assertEqual(output, "** instance id missing **")
 
     def test_create(self):
         with captured_output() as (out, err):
             self.cli.do_create('')
         output = out.getvalue().strip()
-        self.assertEqual(output, "Usage: create BaseModel")
+        self.assertEqual(output, "** class name missing **")
 
         with captured_output() as (out, err):
             self.cli.do_create("BaseModel")
@@ -109,7 +116,7 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_destroy("d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
-        self.assertEqual(output, "** class name missing **")
+        self.assertEqual(output, "** instance id missing **")
 
     def test_destroy_error_invalid_class(self):
         with captured_output() as (out, err):
@@ -173,7 +180,7 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_update("BaseModel name Cat")
         output = out.getvalue().strip()
-        self.assertEqual(output, "** instance id missing **")
+        self.assertEqual(output, "** value missing **")
 
     def test_update_error_invalid_class(self):
         with captured_output() as (out, err):
@@ -186,7 +193,7 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_update("d3da85f2-499c-43cb-b33d-3d7935bc808c name Cat")
         output = out.getvalue().strip()
-        self.assertEqual(output, "** class name missing **")
+        self.assertEqual(output, "** value missing **")
 
     def test_update_error_missing_value(self):
         with captured_output() as (out, err):

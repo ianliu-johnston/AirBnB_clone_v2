@@ -45,6 +45,8 @@ class HBNBCommand(cmd.Cmd):
                 new_obj.save()
             else:
                 new_obj = eval(args[0])()
+                print(new_obj.id)
+                new_obj.save()
 
     def __check_input(self, arguments):
         """Checking all the user inputs"""

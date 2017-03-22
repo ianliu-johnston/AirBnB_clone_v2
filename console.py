@@ -9,6 +9,7 @@ from models.user import User
 from models.review import Review
 from models.__init__ import storage
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     storage.reload()
@@ -17,6 +18,7 @@ class HBNBCommand(cmd.Cmd):
                      "City", "Amenity", "Place", "Review"]
 
     def emptyline(self):
+        """Ignoring empty line"""
         pass
 
     def do_quit(self, args):

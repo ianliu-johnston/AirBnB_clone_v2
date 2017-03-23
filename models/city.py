@@ -3,7 +3,9 @@
 City Class:
     Inherits from BaseModel and Base
 """
-from models import *
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
 
 
 class City(BaseModel, Base):
@@ -12,7 +14,7 @@ class City(BaseModel, Base):
     """
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)
-    state_id = Column(String(60), nullable=False, ForeignKey("states.id"))
+    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

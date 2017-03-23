@@ -3,7 +3,9 @@
 User Class:
     Inherits from BaseModel and Base
 """
-from models import *
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
 
 
 class User(BaseModel):

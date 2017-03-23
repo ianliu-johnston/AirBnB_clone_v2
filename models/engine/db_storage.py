@@ -21,6 +21,9 @@ class DBStorage:
     __session = None
 
     def __init__(self):
+        """
+        Initializes
+        """
         self.__engine = create_engine(
                 'mysql+mymsqldb://{}:{}@{}/{}'.format(
                  getenv('HBNB_MYSQL_USER'),
@@ -32,6 +35,9 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
+        """
+        all
+        """
         new_dict = {}
 #        my_list = ["User", "State", "City", "Amenity", "Place", "Review"]
         if cls is None:
@@ -43,16 +49,28 @@ class DBStorage:
         return (new_dict)
 
     def new(self, obj):
+        """
+        new
+        """
         self.__session.add(obj)
 
     def save(self):
+        """
+        save
+        """
         self.__session.commit()
 
     def delete(self, obj=None):
+        """
+       delete
+        """
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
+        """
+       reload
+        """
         Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()

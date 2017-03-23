@@ -25,8 +25,8 @@ class BaseModel:
             self.id = str(uuid.uuid4())
 
         if kwargs is not None:
-            for k in kwargs[0]:
-                setattr(self, k, kwargs[0][k])
+            for k in kwargs.keys():
+                setattr(self, k, kwargs[k])
 
         """
         for k in kwargs:

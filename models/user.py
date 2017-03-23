@@ -15,6 +15,7 @@ class User(BaseModel):
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
+    places = relationship("Place", cascade="delete", backref="user")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -21,17 +21,18 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        self.__engine = create_engine('mysql+mymsqldb://{}:{}@{}/{}'.format(
-                                      getenv('HBNB_MYSQL_USER'),
-                                      getenv('HBNB_MYSQL_PWD'),
-                                      getenv('HBNB_MYSQL_HOST'),
-                                      getenv('HBNB_MYSQL_DB')))
-        self.__my_list = {"User":User}
+        self.__engine = create_engine(
+                'mysql+mymsqldb://{}:{}@{}/{}'.format(
+                 getenv('HBNB_MYSQL_USER'),
+                 getenv('HBNB_MYSQL_PWD'),
+                 getenv('HBNB_MYSQL_HOST'),
+                 getenv('HBNB_MYSQL_DB')))
+        self.__my_list = {"User": User}
         if getenv('HBNB_MYSQL_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        new_dict={}
+        new_dict = {}
 #        my_list = ["User", "State", "City", "Amenity", "Place", "Review"]
         if cls is None:
             for item in self.__session.query(my_list):

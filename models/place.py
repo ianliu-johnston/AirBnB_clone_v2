@@ -16,6 +16,7 @@ class PlaceAmenity(Base):
                         primary_key=True)
 
 
+
 class Place(BaseModel, Base):
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)

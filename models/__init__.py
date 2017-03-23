@@ -8,7 +8,6 @@ from models.review import Review
 from models.engine import db_storage
 from models.engine import file_storage
 from os import getenv
-DBStorage
 
 if getenv("HBNB_TYPE_STORAGE") == "db":
     storage = db_storage.DBStorage()

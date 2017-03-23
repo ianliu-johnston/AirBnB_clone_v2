@@ -15,12 +15,12 @@ from models.place import Place
 from models.review import Review
 
 
-
 class DBStorage:
 
     __engine = None
     __session = None
 
+<<<<<<< HEAD
     def __init__(self):
         self.__engine = create_engine('mysql+mymsqldb://{}:{}@{}/{}'.format(
                                       getenv('HBNB_MYSQL_USER'),
@@ -29,6 +29,17 @@ class DBStorage:
                                       getenv('HBNB_MYSQL_DB')))
         self.__my_list = {"User":User}
         if getenv('HBNB_MYSQL_ENV') == "test":
+=======
+    def init(self):
+        self.__engine = create_engine(
+                'mysql+mymsqldb://{}:{}@{}/{}',
+                 getenv("HBNB_MYSQL_USER"),
+                 getenv("HBNB_MYSQL_PWD"),
+                 getenv("HBNB_MYSQL_HOST"),
+                 getenv("HBNB_MYSQL_DB") )
+
+        if getenv("HBNB_MYSQL_ENV") == "test":
+>>>>>>> e72025118f016cbbf6c6da40b66ba8de316d1cd4
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):

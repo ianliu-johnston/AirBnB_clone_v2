@@ -10,9 +10,15 @@ from sqlalchemy.orm import relationship
 
 class PlaceAmenity(Base):
     __tablename__ = "place_amenity"
-    place_id = Column(String(60), nullable=False,
-                      ForeignKey("places.id"), primary_key=True)
-    amenity_id = Column(String(60), ForeignKey("amenities.id"), primary_key=True, nullable=False)
+    place_id = Column(String(60),
+                      ForeignKey("places.id"),
+                      nullable=False,
+                      primary_key=True)
+
+    amenity_id = Column(String(60),
+                        ForeignKey("amenities.id"),
+                        primary_key=True,
+                        nullable=False)
 
 class Place(BaseModel, Base):
     __tablename__ = "places"
@@ -27,8 +33,11 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     amenities = [""]
-    amenities = relationship("Amenity", secondary="place_amenity",
-                             viewonly=True)
+    amenities = relationship(
+            "Amenity",
+            secondary="place_amenity",
+            viewonly=True
+            )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

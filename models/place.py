@@ -1,6 +1,10 @@
 #!/usr/bin/python3
+"""
+Place Class:
+    inherits from base
+"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Float, String, Column, ForeignKey, Integer
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 
 
@@ -10,6 +14,7 @@ class PlaceAmenity(Base):
                       nullable=False, primary_key=True)
     amenity_id = Column(String(60), ForeignKey("amenities.id"), nullable=False,
                         primary_key=True)
+
 
 class Place(BaseModel, Base):
     __tablename__ = "places"

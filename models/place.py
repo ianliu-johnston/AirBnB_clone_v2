@@ -25,6 +25,8 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     amenities = [""]
+    amenities = relationship("Amenity", secondary="place_amenity",
+                             viewonly=True)
 
     def __init__(self, *args, **kwargs):
-        super().__init__()
+        super().__init__(*args, **kwargs)

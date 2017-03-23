@@ -25,12 +25,13 @@ class DBStorage:
         Initializes
         """
         self.__engine = create_engine(
-                'mysql+mymsqldb://{}:{}@{}/{}'.format(
+                'mysql+mysqldb://{}:{}@{}/{}'.format(
                  getenv('HBNB_MYSQL_USER'),
                  getenv('HBNB_MYSQL_PWD'),
                  getenv('HBNB_MYSQL_HOST'),
                  getenv('HBNB_MYSQL_DB')))
-        self.__my_list = {"User": User}
+        self.__my_list = {"User": User, "State": State, "City": City,
+                          "Amenity": Amenity, "Place": Place, "Reivew": Review}
         if getenv('HBNB_MYSQL_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -39,12 +40,13 @@ class DBStorage:
         all
         """
         new_dict = {}
-#        my_list = ["User", "State", "City", "Amenity", "Place", "Review"]
         if cls is None:
-            for item in self.__session.query(my_list):
-                new_dict[item.id] = item
+            for x in self.__my_list.values():
+                if self.__session.query(x).all():
+                    for item in self.__session.query(x).all():
+                        new_dict[item.id] = item
         else:
-            for item in self.__session.query(cls):
+            for item in self.__session.query(self.__my_list[cls]):
                 new_dict[item.id] = item
         return (new_dict)
 

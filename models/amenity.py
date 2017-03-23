@@ -4,8 +4,7 @@ Amenity Class:
     Inherits from BaseModel and Base, defines two new class attributes
 """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, Float, String, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String
 
 
 class Amenity(BaseModel, Base):

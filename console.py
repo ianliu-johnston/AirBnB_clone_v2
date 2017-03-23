@@ -38,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             if not args[0] in HBNBCommand.valid_classes:
                 print("** class name does not exist **")
-            if len(args) > 1 and args[0]:
+            if len(args) > 1:
                 usr_input = self.__check_input(args[1:])
                 new_obj = eval(args[0])(**usr_input)
                 print(new_obj.id)

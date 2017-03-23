@@ -14,6 +14,8 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenities = [""]
+    amenities = relationship("Amenity", secondary="place_amenity",
+                             viewonly=True)
 
     def __init__(self, *args, **kwargs):
-        super().__init__()
+        super().__init__(*args, **kwargs)

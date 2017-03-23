@@ -2,7 +2,7 @@
 from datetime import datetime
 import uuid
 import models
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -11,7 +11,7 @@ Base = declarative_base()
 
 class BaseModel:
     """The base class for all storage objects in this project"""
-    id = Column(String(60), unique=True, nullable=False, primary_key=True)
+    id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(DateTime(), nullable=False, default=datetime.now())
     updated_at = Column(DateTime(), nullable=False, default=datetime.now())
 

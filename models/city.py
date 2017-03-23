@@ -4,12 +4,7 @@ City Class:
     Inherits from BaseModel and Base
 """
 from models.base_model import BaseModel, Base
-from models.__init__ import storage
-from models.state import State
-from models.user import User
 from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.orm import relationship
-
 
 
 class City(BaseModel, Base):

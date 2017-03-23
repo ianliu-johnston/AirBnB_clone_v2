@@ -3,13 +3,7 @@
 Review Class:
     inherits from Basemodel and Base
 """
-from models.amenity import Amenity
 from models.base_model import BaseModel, Base
-from models.city import City
-from models.__init__ import storage
-from models.place import Place
-from models.state import State
-from models.user import User
 from sqlalchemy import Column, String, ForeignKey
 
 

@@ -13,6 +13,7 @@ class Amenity(BaseModel, Base):
     """
     __tablename__ = "amenities"
     name = Column(String(128), nullable=False)
+
     def __init__(self, *args, **kwargs):
         """
         Initializes the class with args and kwargs

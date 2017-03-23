@@ -11,7 +11,7 @@ class FileStorage:
     def __init__(self):
         self.reload()
 
-    def all(self):
+    def all(self, cls=None):
         return FileStorage.__objects
 
     def new(self, obj):
@@ -41,3 +41,6 @@ class FileStorage:
                     FileStorage.__objects[k] = eval(cls)(temp[k])
         except Exception as e:
             pass
+
+    def delete(self, obj=None):
+        FileStorage.__objects.pop(obj, None)

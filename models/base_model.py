@@ -2,7 +2,7 @@
 from datetime import datetime
 import uuid
 import models
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 

@@ -11,9 +11,10 @@ class City(BaseModel, Base):
     """
     Represents Cities available to users
     """
-    __tablename__ = "cities"
-    name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = "cities"
+        name = Column(String(128), nullable=False)
+        state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -13,8 +13,9 @@ class Amenity(BaseModel, Base):
     """
     Represents Amenities available to users
     """
-    __tablename__ = "amenities"
-    name = Column(String(128), nullable=False)
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = "amenities"
+        name = Column(String(128), nullable=False)
 
 
     def __init__(self, *args, **kwargs):

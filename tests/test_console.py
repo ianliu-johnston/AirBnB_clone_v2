@@ -1,7 +1,7 @@
+#!/usr/bin/python3
 import unittest
 import sys
 import io
-from contextlib import contextmanager
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -11,7 +11,8 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from datetime import datetime
-from console import HBNBCommand
+import console
+from contextlib import contextmanager
 
 
 @contextmanager
@@ -31,17 +32,23 @@ class Test_Console(unittest.TestCase):
     """
 
     def setUp(self):
+        """
+        setup all tests
+        """
         self.cli = HBNBCommand()
 
         test_args = {'updated_at': datetime(2017, 2, 11, 23, 48, 34, 339879),
                      'id': 'd3da85f2-499c-43cb-b33d-3d7935bc808c',
                      'created_at': datetime(2017, 2, 11, 23, 48, 34, 339743),
                      'name': 'Ace'}
-        self.model = BaseModel(test_args)
+        self.model = State(test_args)
         self.model.save()
 
     def tearDown(self):
-        self.cli.do_destroy("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+        """
+        disassemble tests
+        """
+        self.cli.do_destroy("State d3da85f2-499c-43cb-b33d-3d7935bc808c")
 
     def test_quit(self):
         with self.assertRaises(SystemExit):
@@ -49,7 +56,7 @@ class Test_Console(unittest.TestCase):
 
     def test_show_correct(self):
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_show("State d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
         self.assertFalse("2017, 2, 11, 23, 48, 34, 339879" in output)
         self.assertTrue('2017, 2, 11, 23, 48, 34, 339743' in output)
@@ -62,7 +69,7 @@ class Test_Console(unittest.TestCase):
 
     def test_show_error_missing_arg(self):
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel")
+            self.cli.do_show("State")
         output = out.getvalue().strip()
         self.assertEqual(output, "** instance id missing **")
 
@@ -91,11 +98,11 @@ class Test_Console(unittest.TestCase):
         self.assertEqual(output, "** class name missing **")
 
         with captured_output() as (out, err):
-            self.cli.do_create("BaseModel")
+            self.cli.do_create("State")
         output = out.getvalue().strip()
 
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel {}".format(output))
+            self.cli.do_show("State {}".format(output))
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
 
@@ -137,18 +144,18 @@ class Test_Console(unittest.TestCase):
         test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
                      'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
-        testmodel = BaseModel(test_args)
+        testmodel = State(test_args)
         testmodel.save()
-        self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+        self.cli.do_destroy("State f519fb40-1f5c-458b-945c-2ee8eaaf4900")
 
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+            self.cli.do_show("State f519fb40-1f5c-458b-945c-2ee8eaaf4900")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
     def test_destroy_error_missing_id(self):
         with captured_output() as (out, err):
-            self.cli.do_destroy("BaseModel")
+            self.cli.do_destroy("State")
         output = out.getvalue().strip()
         self.assertEqual(output, "** instance id missing **")
 
@@ -166,7 +173,7 @@ class Test_Console(unittest.TestCase):
 
     def test_destroy_error_invalid_id(self):
         with captured_output() as (out, err):
-            self.cli.do_destroy("BaseModel " +
+            self.cli.do_destroy("State " +
                                 "f519fb40-1f5c-458b-945c-2ee8eaaf4900")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
@@ -175,7 +182,7 @@ class Test_Console(unittest.TestCase):
         test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
                      'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
-        testmodel = BaseModel(test_args)
+        testmodel = State(test_args)
         testmodel.save()
         with captured_output() as (out, err):
             self.cli.do_all("")
@@ -186,7 +193,7 @@ class Test_Console(unittest.TestCase):
 
     def test_all_correct_with_class(self):
         with captured_output() as (out, err):
-            self.cli.do_all("BaseModel")
+            self.cli.do_all("State")
         output = out.getvalue().strip()
         self.assertTrue(len(output) > 0)
         self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
@@ -199,26 +206,26 @@ class Test_Console(unittest.TestCase):
 
     def test_update_correct(self):
         with captured_output() as (out, err):
-            self.cli.do_update("BaseModel " +
+            self.cli.do_update("State " +
                                "d3da85f2-499c-43cb-b33d-3d7935bc808c name Bay")
         output = out.getvalue().strip()
         self.assertEqual(output, '')
 
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_show("State d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
         self.assertTrue("Bay" in output)
         self.assertFalse("Ace" in output)
 
     def test_update_error_invalid_id(self):
         with captured_output() as (out, err):
-            self.cli.do_update("BaseModel 123-456-abc name Cat")
+            self.cli.do_update("State 123-456-abc name Cat")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
     def test_update_error_no_id(self):
         with captured_output() as (out, err):
-            self.cli.do_update("BaseModel name Cat")
+            self.cli.do_update("State name Cat")
         output = out.getvalue().strip()
         self.assertEqual(output, "** value missing **")
 
@@ -237,7 +244,7 @@ class Test_Console(unittest.TestCase):
 
     def test_update_error_missing_value(self):
         with captured_output() as (out, err):
-            self.cli.do_update("BaseModel " +
+            self.cli.do_update("State " +
                                "d3da85f2-499c-43cb-b33d-3d7935bc808c name")
         output = out.getvalue().strip()
         self.assertEqual(output, "** value missing **")

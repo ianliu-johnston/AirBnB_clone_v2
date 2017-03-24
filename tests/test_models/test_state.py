@@ -19,15 +19,16 @@ class Test_StateModel(unittest.TestCase):
 
     def setUp(self):
         self.cli = HBNBCommand()
-        self.model = State()
+        self.model = State(**{"name": "state"})
         self.model.save()
 
     def tearDown(self):
+        self.model.delete()
         self.cli.do_destroy("State " + self.model.id)
 
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
-        self.assertEqual(self.model.name, "")
+        self.assertEqual(self.model.name, "state")
 
 
 if __name__ == "__main__":

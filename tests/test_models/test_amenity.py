@@ -10,6 +10,7 @@ from models.state import State
 from models.user import User
 from console import HBNBCommand
 
+
 class Test_AmenityModel(unittest.TestCase):
     """
     Test the amenity model class

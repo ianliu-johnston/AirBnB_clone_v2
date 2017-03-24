@@ -10,7 +10,6 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
 else:
     Base = object
 
-
 class BaseModel:
     """The base class for all storage objects in this project"""
     id = Column(String(60), nullable=False, primary_key=True)

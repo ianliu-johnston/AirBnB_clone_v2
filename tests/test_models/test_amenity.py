@@ -23,6 +23,7 @@ class Test_AmenityModel(unittest.TestCase):
         self.model.save()
 
     def tearDown(self):
+        self.model.delete()
         self.cli.do_destroy("Amenity " + self.model.id)
 
     def test_var_initialization(self):

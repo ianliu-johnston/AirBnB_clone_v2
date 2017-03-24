@@ -19,7 +19,7 @@ class Test_AmenityModel(unittest.TestCase):
 
     def setUp(self):
         self.cli = HBNBCommand()
-        self.model = Amenity()
+        self.model = Amenity(**{"name": "amenities"})
         self.model.save()
 
     def tearDown(self):
@@ -27,7 +27,7 @@ class Test_AmenityModel(unittest.TestCase):
 
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "name"))
-        self.assertEqual(self.model.name, "")
+        self.assertEqual(self.model.name, "amenities")
 
 
 if __name__ == "__main__":

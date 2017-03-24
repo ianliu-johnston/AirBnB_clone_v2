@@ -5,7 +5,6 @@ import models
 from sqlalchemy import Column, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
-
 Base = declarative_base()
 
 
@@ -27,11 +26,12 @@ class BaseModel:
         if kwargs is not None:
             for k in kwargs.keys():
                 setattr(self, k, kwargs[k])
-
+        self.save()
         """
         for k in kwargs:
             print("kwargs: {}: {}".format(k, kwargs[k]))
         """
+
 
     def save(self):
         """method to update self"""
@@ -57,4 +57,4 @@ class BaseModel:
 
     def delete(self):
         """deleting current instance"""
-        models.storage.delete(self.id)
+        models.storage.delete(self)

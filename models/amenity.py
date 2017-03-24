@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 Amenity Class:
     Inherits from BaseModel and Base, defines two new class attributes
@@ -16,8 +17,6 @@ class Amenity(BaseModel, Base):
         __tablename__ = "amenities"
         name = Column(String(128), nullable=False)
 
-    else:
-        name = ""
 
     def __init__(self, *args, **kwargs):
         """

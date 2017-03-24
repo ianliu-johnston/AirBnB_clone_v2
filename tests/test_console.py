@@ -79,6 +79,12 @@ class Test_Console(unittest.TestCase):
         self.assertEqual(output, "** instance id missing **")
 
     def test_create(self):
+        """
+        my_test = "city_id=\"0001\" user_id=\"0001\"" + \
+        "name=\"My_little_house\" number_rooms=4 number_bathrooms=2" + \
+        "max_guest=10 price_by_night=300" + \
+        "latitude=37.773972 longitude=-122.431297"
+        """
         with captured_output() as (out, err):
             self.cli.do_create('')
         output = out.getvalue().strip()
@@ -93,6 +99,40 @@ class Test_Console(unittest.TestCase):
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
 
+        with captured_output() as (out, err):
+            self.cli.do_create("State name=\"California\"")
+            self.cli.do_create("State name=\"Arizona\"")
+
+        """
+        with captured_output() as (out, err):
+            self.cli.do_all("State")
+        output2 = out.getvalue().strip()
+        self.assertTrue("California" in output2)
+        self.assertTrue("Arizona" in output2)
+        """
+
+        """
+        with captured_output() as (out, err):
+            self.cli.do_create(my_test)
+        output2 = out.getvalue().strip()
+        self.assertTrue("0001" in output2)
+        self.assertTrue("My little house" in output2)
+        self.assertTrue("number_rooms" in output2)
+        self.assertTrue("max_guest" in output2)
+        self.assertTrue("price_by_night" in output2)
+        self.assertTrue("latitude" in output2)
+        self.assertTrue("longitude" in output2)
+        self.assertTrue("datetime.datetime" in output2)
+
+        with captured_output() as (out, err):
+            self.cli.do_create("Place")
+        output = out.getvalue().strip()
+
+        with captured_output() as (out, err):
+            self.cli.do_show("Place {}".format(output))
+        output2 = out.getvalue().strip()
+        self.assertTrue(output in output2)
+        """
     def test_destroy_correct(self):
         test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
                      'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
@@ -201,6 +241,7 @@ class Test_Console(unittest.TestCase):
                                "d3da85f2-499c-43cb-b33d-3d7935bc808c name")
         output = out.getvalue().strip()
         self.assertEqual(output, "** value missing **")
+
 
 if __name__ == "__main__":
     unittest.main()

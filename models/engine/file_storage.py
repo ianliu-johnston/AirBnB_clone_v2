@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+File Storage class
+    Uses database
+"""
 import json
 from datetime import datetime
 from models import *
@@ -27,6 +31,9 @@ class FileStorage:
             fd.write(json.dumps(store))
 
     def reload(self):
+        """
+        Reloads the currently open Database
+        """
         try:
             with open(FileStorage.__file_path,
                       mode="r+", encoding="utf-8") as fd:
@@ -43,4 +50,13 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
+        """
+        Deletes the current filestorage object
+        """
         FileStorage.__objects.pop(obj, None)
+
+    def close(self):
+        """
+        Save and close the session
+        """
+        self.save()

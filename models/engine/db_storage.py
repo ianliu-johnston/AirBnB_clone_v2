@@ -5,7 +5,7 @@ manages database storage
 """
 from sqlalchemy import create_engine
 from os import getenv
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models.user import User
 from models.state import State
@@ -16,13 +16,16 @@ from models.review import Review
 
 
 class DBStorage:
-
+    """
+    Class to connect the mysql database to
+    a flask web application
+    """
     __engine = None
     __session = None
 
     def __init__(self):
         """
-        Initializes
+        Initialize the engine with environment variables
         """
         self.__engine = create_engine(
                 'mysql+mysqldb://{}:{}@{}/{}'.format(
@@ -30,14 +33,20 @@ class DBStorage:
                  getenv('HBNB_MYSQL_PWD'),
                  getenv('HBNB_MYSQL_HOST'),
                  getenv('HBNB_MYSQL_DB')))
-        self.__my_list = {"User": User, "State": State, "City": City,
-                          "Amenity": Amenity, "Place": Place, "Reivew": Review}
+        self.__my_list = {
+                "User": User,
+                "State": State,
+                "City": City,
+                "Amenity": Amenity,
+                "Place": Place,
+                "Reivew": Review
+                }
         if getenv('HBNB_MYSQL_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """
-        all
+        show all sessions
         """
         new_dict = {}
         if cls is None:
@@ -52,27 +61,34 @@ class DBStorage:
 
     def new(self, obj):
         """
-        new
+        creates a new session
         """
         self.__session.add(obj)
 
     def save(self):
         """
-        save
+        commit the session to the db
         """
         self.__session.commit()
 
     def delete(self, obj=None):
         """
-       delete
+        deletes the session
         """
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
         """
-       reload
+        reloads the current DB
         """
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine)
-        self.__session = Session()
+        self.__session = scoped_session(
+                sessionmaker(bind=self.__engine)
+                )
+
+    def close(self):
+        """
+        Closes and removes the session
+        """
+        self.__session.remove()

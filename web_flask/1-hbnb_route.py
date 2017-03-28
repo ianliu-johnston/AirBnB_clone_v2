@@ -24,3 +24,6 @@ def HBNB():
     Returns the route /hbnb
     """
     return ('HBNB\n')
+
+if __name__ == "__main__":
+    app.run(port=5000)

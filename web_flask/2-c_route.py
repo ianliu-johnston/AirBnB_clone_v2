@@ -34,3 +34,6 @@ def c_is(value):
     where <value> is any URI that the user requests
     """
     return ("C {:s}\n".format(value.replace("_", " ")))
+
+if __name__ == "__main__":
+    app.run(port=5000)

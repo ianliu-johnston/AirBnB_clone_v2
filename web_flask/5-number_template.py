@@ -62,7 +62,9 @@ def number_is(n):
 def number_template(n):
 
     """
-    Displays /number/<n> URI only if it is an integer
+    Displays the template 5-number.html
+    if /number_template/<n> URI is requested
+    and if it is an integer
     """
     return(render_template('5-number.html', n=n))
 

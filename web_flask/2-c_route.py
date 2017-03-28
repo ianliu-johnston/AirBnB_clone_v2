@@ -33,4 +33,4 @@ def c_is(value):
     Returns the route /c/<value>
     where <value> is any URI that the user requests
     """
-    return ("C {:s}\n".format(value))
+    return ("C {:s}\n".format(value.replace("_", " ")))

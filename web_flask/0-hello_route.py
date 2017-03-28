@@ -14,4 +14,4 @@ def hello_HBNB():
     """
     Just returns text
     """
-    return (' Hello HBNB!')
+    return ('Hello HBNB!\n')

@@ -14,7 +14,7 @@ def hello_HBNB():
     """
     Just returns text
     """
-    return ('Hello HBNB!\n')
+    return ('Hello HBNB!')
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ def hello_HBNB():
     """
     Just returns text
     """
-    return ('Hello HBNB!\n')
+    return ('Hello HBNB!')
 
 
 @app.route('/hbnb')
@@ -24,7 +24,7 @@ def HBNB():
     """
     Returns the route /hbnb
     """
-    return ('HBNB\n')
+    return ('HBNB')
 
 
 @app.route('/c/<value>')
@@ -34,7 +34,7 @@ def c_is(value):
     Returns the route /c/<value>
     where <value> is any URI that the user requests
     """
-    return ("C {:s}\n".format(value.replace("_", " ")))
+    return ("C {:s}".format(value.replace("_", " ")))
 
 
 @app.route('/python/')
@@ -46,7 +46,7 @@ def python_is(text="is cool"):
     Returns the route /python/<text>
     where <value> is any URI that the user requests
     """
-    return ("Python {:s}\n".format(text.replace("_", " ")))
+    return ("Python {:s}".format(text.replace("_", " ")))
 
 
 @app.route('/number/<int:n>')
@@ -55,7 +55,7 @@ def number_is(n):
     """
     Displays /number/<n> URI only if it is an integer
     """
-    return("{:d} is a number\n".format(n))
+    return("{:d} is a number".format(n))
 
 
 @app.route('/number_template/<int:n>')

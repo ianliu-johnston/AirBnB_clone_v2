@@ -22,7 +22,7 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             allstorage = storage.all('Cities').values()
-            return ([a for a in allstorage if self.id == city.state.id])
+            return ([a for a in allstorage if self.id == city.state_id])
 
     def __init__(self, *args, **kwargs):
         super(State, self).__init__(*args, **kwargs)

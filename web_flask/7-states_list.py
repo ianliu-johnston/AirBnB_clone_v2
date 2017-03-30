@@ -11,16 +11,18 @@ app = Flask(__name__)
 
 
 @app.route('/states_list')
-def hello_HBNB():
-
+def state_list():
     """
-    :wq
+    Inserts all States from the database to the DOM
     """
     storall = storage.all("State").values()
     return (render_template('7-states_list.html', states=storall))
 
 @app.teardown_appcontext
 def teardown(exception):
+    """
+    Tears down the db connection
+    """
     storage.close()
 
 if __name__ == "__main__":

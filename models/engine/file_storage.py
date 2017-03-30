@@ -59,4 +59,4 @@ class FileStorage:
         """
         Save and close the session
         """
-        self.save()
+        self.reload()

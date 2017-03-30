@@ -18,7 +18,7 @@ def state_info(state_id="(nil)"):
     Inserts all Cities in each State from the database to the DOM
     """
     storall = storage.all("State").values()
-    state = "Not Found!" if state_id != "(nil)" else state_id
+    state = "Not found!" if state_id != "(nil)" else state_id
     for states in storall:
         if states.id == state_id:
             state = states

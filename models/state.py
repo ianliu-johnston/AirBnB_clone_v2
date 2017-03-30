@@ -21,8 +21,8 @@ class State(BaseModel, Base):
         name = ""
         @property
         def cities(self):
-            allstorage = storage.all('Cities')
-            return (a for a in allstorage)
+            allstorage = storage.all('Cities').values()
+            return ([a for a in allstorage if self.id == city.state.id])
 
     def __init__(self, *args, **kwargs):
         super(State, self).__init__(*args, **kwargs)

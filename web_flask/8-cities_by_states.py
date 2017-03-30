@@ -10,8 +10,8 @@ Very Simple Flask hello world
 app = Flask(__name__)
 
 
-@app.route('/states_list')
-def state_list():
+@app.route('/cities_by_state')
+def cities_by_state():
     """
     Inserts all States from the database to the DOM
     """

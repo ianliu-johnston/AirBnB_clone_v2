@@ -39,6 +39,9 @@ def teardown(exception):
 
 @app.after_request
 def add_headers(response):
+    """
+    Sets a custom http header
+    """
     response.headers['Server'] = "apache/2.4.7"
     return (response)
 

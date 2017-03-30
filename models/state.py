@@ -8,6 +8,7 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship, backref
 from os import getenv
 
+
 class State(BaseModel, Base):
     """
     Class to handle state objecs
@@ -19,6 +20,7 @@ class State(BaseModel, Base):
         cities = relationship("City", cascade="delete", backref="state")
     else:
         name = ""
+
         @property
         def cities(self):
             allstorage = storage.all('Cities').values()

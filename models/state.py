@@ -19,12 +19,11 @@ class State(BaseModel, Base):
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade="delete", backref="state")
     else:
-        name = ""
-
         @property
         def cities(self):
-            stor = storage.all('City').values()
+            stor = storage.all('City')
             return ([a for a in stor if self.id == a.state_id])
+        name = ""
 
     def __init__(self, *args, **kwargs):
         super(State, self).__init__(*args, **kwargs)

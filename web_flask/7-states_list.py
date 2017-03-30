@@ -16,7 +16,8 @@ def hello_HBNB():
     """
     :wq
     """
-    return (render_template('7-states_list.html', states=storage.all("State").values()))
+    storall = storage.all("State").values()
+    return (render_template('7-states_list.html', states=storall))
 
 @app.teardown_appcontext
 def teardown(exception):

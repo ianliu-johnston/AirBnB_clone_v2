@@ -6,7 +6,7 @@ State Class:
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship, backref
-from models.__init__ import storage
+from models import storage
 from os import getenv
 
 

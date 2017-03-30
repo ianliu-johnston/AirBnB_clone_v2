@@ -10,10 +10,10 @@ Very Simple Flask hello world
 app = Flask(__name__)
 
 
-@app.route('/cities_by_state')
-def cities_by_state():
+@app.route('/cities_by_states')
+def cities_by_states():
     """
-    Inserts all States from the database to the DOM
+    Inserts all Cities in each State from the database to the DOM
     """
     storall = storage.all("State").values()
     return (Response(render_template(

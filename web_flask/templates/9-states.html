@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <HTML lang="en">
 	<HEAD>
 		<TITLE>HBNB</TITLE>
@@ -6,23 +6,19 @@
 	<BODY>
 	{% if state_id == "Not Found!"  %}
 		<H1>{{ state_id }}</H1>
-	{% else %}
-		<H1>States{% if state_id != "(nil)" %}: {{ state_id.name }}
-		</H1>
+	{% elif state_id != "(nil)" %}
+		<H1>State: {{ state_id.name }} </H1>
 		<H3>Cities:</H3>
-			<UL>
-				{% for city in state_id.cities|sort(attribute='name') %}
+			<UL>{% for city in state_id.cities|sort(attribute='name') %}
 				<LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
 				{% endfor %}
-		{% else %}
-		</H1>
-
-		<UL>{% for state in states|sort(attribute='name') %}
-			<LI>{{ state.id }}: <B>{{ state.name }}</B>
-			</LI>
-			{% endfor %}
-		{% endif %}
-		</UL>
+			</UL>
+	{% else %}
+		<H1>State</H1> 
+			<UL>{% for state in states|sort(attribute='name') %}
+				<LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
+				{% endfor %}
+			</UL>
 	{% endif %}
 	</BODY>
 </HTML>

@@ -18,6 +18,7 @@ def state_list():
     storall = storage.all("State").values()
     return (render_template('7-states_list.html', states=storall))
 
+
 @app.teardown_appcontext
 def teardown(exception):
     """

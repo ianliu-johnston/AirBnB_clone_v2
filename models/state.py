@@ -21,7 +21,7 @@ class State(BaseModel, Base):
     else:
         @property
         def cities(self):
-            stor = storage.all('City')
+            stor = storage.all('City').values()
             return ([a for a in stor if self.id == a.state_id])
         name = ""
 
